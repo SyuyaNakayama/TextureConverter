@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureConverter", "TextureConverter.vcxproj", "{3896812E-AEC5-4DE0-AD9C-E6A1600FEF41}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTex", "DirectXTex\DirectXTex.vcxproj", "{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{3896812E-AEC5-4DE0-AD9C-E6A1600FEF41}.Release|x64.Build.0 = Release|x64
 		{3896812E-AEC5-4DE0-AD9C-E6A1600FEF41}.Release|x86.ActiveCfg = Release|Win32
 		{3896812E-AEC5-4DE0-AD9C-E6A1600FEF41}.Release|x86.Build.0 = Release|Win32
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Debug|x64.ActiveCfg = Debug|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Debug|x64.Build.0 = Debug|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Debug|x86.ActiveCfg = Debug|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Debug|x86.Build.0 = Debug|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Release|x64.ActiveCfg = Release|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Release|x64.Build.0 = Release|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Release|x86.ActiveCfg = Release|x64
+		{BFA657FA-43E3-4CDA-8452-C9BD48B3F362}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
