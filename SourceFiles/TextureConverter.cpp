@@ -80,14 +80,37 @@ void TextureConverter::SeparateFilePath(const std::wstring& filePath_)
 
 void TextureConverter::SaveDDSTextureToFile()
 {
+	ScratchImage mipChain;
+	// ミップマップ生成
+	HRESULT result = GenerateMipMaps(scratchImage.GetImages(),
+		scratchImage.GetImageCount(), scratchImage.GetMetadata(),
+		TEX_FILTER_DEFAULT, 0, mipChain);
+	if (SUCCEEDED(result))
+	{
+		// イメージとメタデータを、ミップマップ版で置き換える
+		scratchImage = std::move(mipChain);
+		metadata = scratchImage.GetMetadata();
+	}
+
+	// 圧縮形式に変換
+	ScratchImage converted;
+	result = Compress(scratchImage.GetImages(), scratchImage.GetImageCount(), metadata,
+		DXGI_FORMAT_BC7_UNORM_SRGB, TEX_COMPRESS_BC7_QUICK | TEX_COMPRESS_SRGB_OUT |
+		TEX_COMPRESS_PARALLEL, 1.0f, converted);
+	if (SUCCEEDED(result))
+	{
+		scratchImage = std::move(converted);
+		metadata = scratchImage.GetMetadata();
+	}
+
 	// 読み込んだテクスチャをSRGBとして扱う
 	metadata.format = MakeSRGB(metadata.format);
-	
+
 	// 出力ファイル名を設定する
 	std::wstring filePath = directoryPath + fileName + L".dds";
-	
+
 	// DDSファイル書き出し
-	HRESULT result = SaveToDDSFile(scratchImage.GetImages(), 
+	result = SaveToDDSFile(scratchImage.GetImages(),
 		scratchImage.GetImageCount(), metadata, DDS_FLAGS_NONE, filePath.c_str());
 	assert(SUCCEEDED(result));
 }
@@ -96,7 +119,7 @@ void TextureConverter::ConvertTextureWICToDDS(const std::string& filePath)
 {
 	// テクスチャファイルを読み込む
 	LoadWICTextureFromFile(filePath);
-	
+
 	// DDS形式に変換して書き出す
 	SaveDDSTextureToFile();
 }
