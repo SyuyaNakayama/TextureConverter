@@ -11,18 +11,26 @@ enum class Argument
 	Num
 };
 
-int main(int argc,char* argv[])
+int main(int argc, char* argv[])
 {
-	assert(argc >= (int)Argument::Num);
+	if (argc < (int)Argument::Num)
+	{
+		// 使い方を表示する
+		TextureConverter::OutputUsage();
+		return 0;
+	}
 
 	HRESULT hr = CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
 	assert(SUCCEEDED(hr));
 
+	// オプションの数
+	int numOptions = argc - (int)Argument::Num;
+	// オプション配列(ダブルポインタ)
+	char** options = argv + (int)Argument::Num;
+
 	TextureConverter converter;
-	converter.ConvertTextureWICToDDS(argv[(int)Argument::FilePath]);
+	converter.ConvertTextureWICToDDS(argv[(int)Argument::FilePath], numOptions, options);
 
 	CoUninitialize();
-
-	system("pause");
 	return 0;
 }

@@ -6,7 +6,7 @@ class TextureConverter
 {
 private:
 	// 画像の情報
-	DirectX::TexMetadata metadata;
+	DirectX::TexMetadata metadata{};
 	// 画像イメージのコンテナ
 	DirectX::ScratchImage scratchImage;
 	// ディレクトリパス
@@ -35,13 +35,21 @@ private:
 	/// <param name="filePath_">ファイルパス</param>
 	void SeparateFilePath(const std::wstring& filePath_);
 
-	// DDSテクスチャとしてファイル書き出し
-	void SaveDDSTextureToFile();
+	/// <summary>
+	/// DDSテクスチャとしてファイル書き出し
+	/// </summary>
+	/// <param name="numOptions">オプションの数</param>
+	/// <param name="options">オプション配列</param>
+	void SaveDDSTextureToFile(int numOptions = 0, char* options[] = nullptr);
 
 public:
+	static void OutputUsage();
+
 	/// <summary>
 	/// テクスチャをWICからDDSに変換する
 	/// </summary>
 	/// <param name="filePath">ファイルパス</param>
-	void ConvertTextureWICToDDS(const std::string& filePath);
+	/// <param name="numOptions">オプションの数</param>
+	/// <param name="options">オプション配列</param>
+	void ConvertTextureWICToDDS(const std::string& filePath, int numOptions = 0, char* options[] = nullptr);
 };
